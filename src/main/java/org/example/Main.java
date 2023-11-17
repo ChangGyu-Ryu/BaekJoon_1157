@@ -4,14 +4,12 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static int[] getAlphbetCount(String str) {
-        int[] count = new int[26];
+    public static int getAlphbetCount(String str, char alp) {
+        int count = 0;
         for(int i = 0; i < str.length(); i ++) {
-            count[str.charAt(i) - 'A']++;
+            if(alp == str.charAt(i)) count++;
         }
-
         return count;
-
     }
 
     public static void main(String[] args) {
@@ -21,17 +19,17 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         String str = sc.next().toUpperCase();
-        int[] count = getAlphbetCount(str);
 
         int maxCount = -1;
         char maxAlphabet = '?';
 
-        for(int i=0; i < 26; i++) {
-            if(count[i] > maxCount) {
-                maxCount = count[i];
-                maxAlphabet = (char)('A' + i);
+        for(char alp = 'A'; alp <= 'Z'; alp++) {
+            int count = getAlphbetCount(str, alp);
+            if(count > maxCount) {
+                maxCount = count;
+                maxAlphabet = alp;
             }
-            else if(count[i] == maxCount) {
+            else if(count == maxCount) {
                 maxAlphabet = '?';
             }
         }
